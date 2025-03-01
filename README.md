@@ -5,90 +5,84 @@
 | Christoforus Indra Bagus Pratama | 5025231124 |
 | Mohammad Azhar Aziz | 5025231131 |
 
+# Daftar Isi
+1. Binary checker
+## :sparkles: Arithmetic Expression Checker
+- [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#star-arithmetic-expression-checker)
+- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-rules)
+- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-contoh)
+- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-kode-python-)
+- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-penjelasan-program)
+  
 
-INI PUNYA CRISTO
 
-Rule-Rule
-	Rule 1 (Base Case – Bilangan Dasar):
+# :star: Arithmetic Expression Checker
+Sebagai seorang intern di software house, anda diminta membuat sebuah aturan rekursif untuk
+mendefinisikan Kalimat Aritmatika. <br>
+Σ = { 0 1 2 3 4 5 6 7 8 9 + - / * ( ) } <br>
+Cth kalimat artimatika : ( 1 + 9 ) - ( 4 + 5 ) <br>
+Cth kalimat aritmatika invalid : ( 3 + ( 4 - ) 8 ) <br> 
+
+## :herb: Rules
+###	Rule 1 (Base Case – Bilangan Dasar) :
 -	Bilangan tunggal: Setiap angka tunggal (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) adalah ekspresi aritmatika yang valid.
 -	Bilangan negatif tunggal: Setiap angka dengan tanda minus di depannya (misalnya, -1, -2, …, -9) juga valid.
-	Rule 2 (Pembungkusan dengan Tanda Kurung dan Negasi):
+###	Rule 2 (Pembungkusan dengan Tanda Kurung dan Negasi) :
 -	Jika x adalah ekspresi aritmatika valid, maka (x) juga valid.
 -	Jika x adalah ekspresi aritmatika valid, maka -(x) juga valid.
-	Rule 3 (Penggabungan dengan Operator Biner):
-Jika x dan y adalah ekspresi aritmatika valid, maka ekspresi yang menggabungkan keduanya dengan operator berikut adalah valid:
-•	x + y (dengan syarat: operand kanan y tidak diawali dengan tanda minus, untuk membedakan dengan negasi)
-•	x - y (dengan syarat yang sama: operand kanan tidak dimulai dengan tanda minus)
-•	x * y
-•	x / y
+###	Rule 3 (Penggabungan dengan Operator Biner) :
+Jika x dan y adalah ekspresi aritmatika valid, maka ekspresi yang menggabungkan keduanya dengan operator berikut adalah valid :
+- x + y (dengan syarat: operand kanan y tidak diawali dengan tanda minus, untuk membedakan dengan negasi)
+- x - y (dengan syarat yang sama: operand kanan tidak dimulai dengan tanda minus)
+- x * y
+- x / y
 
-Contoh 
-a.) ( 4 - 3 ) + (( 9 * 2 ) / 3)
- 
-	Iterasi 1 : Pengecekan Bilangan (Base Case)
- 
-Angka-angka : 4, 3, 9, 2, dan 3
-Semua angka tersebut termasuk dalam base (bilangan tunggal valid).
-	Iterasi 2 : Pembentukan Ekspresi Sederhana
-Subekspresi (4-3) :
--	Langkah 1: Ambil 4 dan 3 yang sudah valid.
--	Langkah 2: Gabungkan dengan operator - menggunakan Rule 3 (x – y adalah valid)
- 
-Catatan: Pastikan operand kanan (3) tidak diawali dengan tanda - (syarat terpenuhi).
--	Langkah 3: Hasil 4-3 valid sebagai AE.
--	Langkah 4: Karena ada tanda kurung di sekelilingnya, gunakan Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (4-3) yang juga valid.
- 
-Subekspresi (9*2):
--	Langkah 1: Ambil 9 dan 2 yang valid.
--	Langkah 2: Gabungkan dengan operator * menggunakan Rule 3 sehingga 9*2 valid (x * y adalah valid).
- 
--	Langkah 3: Bungkus dengan tanda kurung sesuai Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (9*2) yang valid.
- 
-	Iterasi 3: Pembentukan Ekspresi Kompleks
-Subekspresi ((9*2) / 3):
--	Langkah 1: Gunakan hasil (9*2) yang sudah valid sebagai x operand kiri.
--	Langkah 2: Operand kanan adalah 3 sebagai y (valid sebagai base).
--	Langkah 3: Gabungkan dengan operator / menggunakan Rule 3 sehingga (9*2)/3 valid. (x / y adalah valid).
- 
--	Langkah 4: Bungkus hasil tersebut dengan tanda kurung menggunakan Rule 2 untuk mendapatkan ((9*2)/3) yang valid. (x valid, maka (x) juga valid)
- 
-	Iterasi 4: Penggabungan Akhir
-Gabungkan kedua subekspresi:
--	Operand kiri: (4-3) sebagai x (valid) 
--	Operand kanan: ((9*2)/3) sebagai y (valid)
--	Operator : +
-Rule 3: Untuk operator +, pastikan operand kanan tidak dimulai dengan - (syarat terpenuhi). (x + y adalah valid).
- 
--	Hasil : (4-3)+((9*2)/3) merupakan ekspresi aritmatika yang valid.
- 
-Kesimpulan
-(4-3)+((9*2)/3) → Valid
-(Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar, pembentukan ekspresi sederhana, pembungkus dengan tanda kurung, hingga penggabungan menggunakan operator biner sesuai dengan rules.)
+## :herb: Contoh 
+### ( 4 - 3 ) + (( 9 * 2 ) / 3)
+- **Iterasi 1** : Pengecekan Bilangan (Base Case) <br>
+  ![( 4 - 3 ) + (( 9  2 )  3 )](https://github.com/user-attachments/assets/2722cd60-9d14-4ae2-b980-abe8a220f697) <br>
+  Angka-angka : 4, 3, 9, 2, dan 3 <br>
+  Semua angka tersebut termasuk dalam base (bilangan tunggal valid).
+- **Iterasi 2** : Pembentukan Ekspresi Sederhana <br>
+   _**Subekspresi (4-3) :**_ 
+  -	Langkah 1 : Ambil 4 dan 3 yang sudah valid.
+  -	Langkah 2 : Gabungkan dengan operator - menggunakan Rule 3 (x – y adalah valid) <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (1)](https://github.com/user-attachments/assets/917b3d95-906c-4b29-8cb4-89f7792c2563) <br>
+    Catatan: Pastikan operand kanan (3) tidak diawali dengan tanda - (syarat terpenuhi).
+  -	Langkah 3 : Hasil 4-3 valid sebagai AE.
+  -	Langkah 4 : Karena ada tanda kurung di sekelilingnya, gunakan Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (4-3) yang juga valid.<br>
+  ![( 4 - 3 ) + (( 9  2 )  3 ) (2)](https://github.com/user-attachments/assets/9aa1b422-726e-41d2-928e-cfce4b68d172) <br>
+   _**Subekspresi (9*2) :**_ 
+  -	Langkah 1 : Ambil 9 dan 2 yang valid.
+  -	Langkah 2 : Gabungkan dengan operator * menggunakan Rule 3 sehingga 9*2 valid (x * y adalah valid). <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (3)](https://github.com/user-attachments/assets/264b486f-1bef-401c-9118-5a2c31fbdbff)
+  - Langkah 3 : Bungkus dengan tanda kurung sesuai Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (9*2) yang valid. <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (4)](https://github.com/user-attachments/assets/5566b243-1573-4938-b6c7-6dd4dff435e3)
+- **Iterasi 3** : Pembentukan Ekspresi Kompleks <br>
+  _**Subekspresi ((9*2) / 3) :**_
+  -	Langkah 1 : Gunakan hasil (9*2) yang sudah valid sebagai x operand kiri.
+  -	Langkah 2 : Operand kanan adalah 3 sebagai y (valid sebagai base).
+  -	Langkah 3 : Gabungkan dengan operator / menggunakan Rule 3 sehingga (9*2)/3 valid. (x / y adalah valid). <br> 
+   ![( 4 - 3 ) + (( 9  2 )  3 ) (5)](https://github.com/user-attachments/assets/f47a0438-7fb5-4b1a-8fcb-dfd262ef1f40)
+  -	Langkah 4 : Bungkus hasil tersebut dengan tanda kurung menggunakan Rule 2 untuk mendapatkan ((9*2)/3) yang valid. (x valid, maka (x) juga valid) <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (6)](https://github.com/user-attachments/assets/1404c8af-4cb1-4aa0-9ff0-2bf6f9543f17)
+- **Iterasi 4** : Penggabungan Akhir <br>
+  Gabungkan kedua subekspresi :
+  -	Operand kiri : (4-3) sebagai x (valid) 
+  -	Operand kanan : ((9*2)/3) sebagai y (valid)
+  -	Operator : + <br>
+    Rule 3 : Untuk operator +, pastikan operand kanan tidak dimulai dengan - (syarat terpenuhi). (x + y adalah valid). <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (7)](https://github.com/user-attachments/assets/1ba6961c-fcbb-4e75-bf4b-1c26c9e23d9e)
+-	**Hasil** : (4-3)+((9*2)/3) merupakan ekspresi aritmatika yang **valid**.
+  ![( 4 - 3 ) + (( 9  2 )  3 ) (8)](https://github.com/user-attachments/assets/d943bee1-2801-4917-bddb-4edc7da89d5d)
 
+**Kesimpulan** <br>
+(4 - 3) + (( 9 * 2 ) / 3) → Valid <br>
+Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar, pembentukan ekspresi sederhana, pembungkus dengan tanda kurung, hingga penggabungan menggunakan operator biner sesuai dengan rules.
 
-Contoh
-b.) 3 - ( 9 + ) + 5 - 3
-	Iterasi 1: Pengecekan Struktur Dasar dan Bilangan (Base Case)
-Angka-angka yang muncul : 3, 9, 5, dan 3
-Secara individu, angka-angka tersebut valid.
-	Iterasi 2: Pengecekan Penggunaan Tanda Kurung
-Observasi:
--	Ekspresi diawali dengan tanda kurung buka ( pada posisi awal.
--	Masalah: Tidak terdapat tanda kurung tutup yang menyelesaikan seluruh ekspresi.
-Kesimpulan Sementara: Kekurangan tanda kurung menandakan struktur tidak lengkap.
-	Iterasi 3: Pengecekan Subekspresi Internal
-Subekspresi (9+):
--	Langkah 1: Terdapat tanda kurung yang membuka dengan (9+ dan diikuti oleh tanda ).
--	Langkah 2: Di dalam tanda kurung, terdapat 9+.
--	Langkah 3: Menggunakan Rule 3, operator + membutuhkan dua operand:
-Operand kiri: 9 (valid).
-Operand kanan: Tidak ada angka atau ekspresi yang mengikuti operator +.
-Kesimpulan: Karena tidak terdapat operand kedua untuk operator +, subekspresi (9+) tidak valid.
-	Iterasi 4: Kesimpulan Akhir
-Karena terdapat masalah struktur tanda kurung (kurang tanda kurung tutup) dan subekspresi (9+) yang tidak valid (tidak memenuhi Rule 3), maka keseluruhan kalimat aritmatika (3-(9+)+5-3 dinyatakan tidak valid.
-Kode Python :
+## :herb: Kode Python :
 
-
+```
 # Fungsi untuk mengecek apakah string s merupakan bilangan dasar (base)
 # Base: bilangan tunggal (0-9) atau bilangan negatif tunggal (-1 sampai -9)
 def is_base_number(s):
@@ -192,3 +186,5 @@ if __name__ == '__main__':
         print("Valid")
     else:
         print("Tidak Valid")
+```
+## :herb: Penjelasan Program
