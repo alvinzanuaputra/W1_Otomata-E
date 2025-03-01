@@ -8,11 +8,11 @@
 # Daftar Isi
 1. Binary checker
 ## :sparkles: Arithmetic Expression Checker
-- [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#star-arithmetic-expression-checker)
-- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-rules)
-- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-contoh)
-- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-kode-python-)
-- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/edit/main/README.md#herb-penjelasan-program)
+- [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-arithmetic-expression-checker)
+- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
+- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
+- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python-)
+- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
   
 
 
