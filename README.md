@@ -188,3 +188,88 @@ if __name__ == '__main__':
         print("Tidak Valid")
 ```
 ## :herb: Penjelasan Program
+### 1. Panggilan Awal
+- Fungsi yang dipanggil : _valid_expr(expr)_
+- Input : "(4 - 3) + (( 9 * 2 ) / 3 )" <br>
+- Langkah awal :
+  - Ekspresi di-strip (menghilangkan spasi awal/akhir).
+  - Fungsi _is_base_number(expr)_ dipanggil, tetapi karena ekspresi lebih kompleks (tidak hanya satu angka), ia mengembalikan _False_.
+### 2. Pengecekan Tanda Kurung Paling Luar
+- Fungsi yang dipakai : _strip_outer_parentheses(expr)_
+- Proses :
+  - Program mengecek apakah seluruh ekspresi diawali dan diakhiri oleh tanda kurung yang benar.
+  - Karena operator + berada di luar tanda kurung, fungsi mendeteksi bahwa tanda kurung paling luar tidak mencakup seluruh ekspresi, sehingga tidak mengubah string.
+- Hasil : Ekspresi tetap "(4 - 3) + (( 9 * 2 ) / 3 )".
+### 3. Pengecekan Unary Minus
+- Proses :
+  - Program memeriksa apakah ekspresi diawali dengan tanda '-' untuk menangani kasus negasi unary.
+  - Pada input ini, tidak ada unary minus di awal sehingga lanjut ke langkah berikutnya.
+### 4. Pengecekan Operator Biner
+- Daftar Operator : ['**', '+', '-', '*', '/']
+- Iterasi atas operator :
+  - Operator '**' : Tidak ditemukan pada level terluar.
+  - Operator '+' :
+    - Fungsi yang dipakai : _split_by_operator(expr, '+')_
+    - Program melakukan scanning dari awal ke akhir dengan variabel depth untuk melacak level tanda kurung.
+    - Saat depth == 0, operator + terdeteksi di antara dua subekspresi.
+    - Hasil Split :
+      - Operand kiri (left) : "(4 - 3)"
+      - Operand kanan (right) : "(( 9 * 2 ) / 3 )"
+    - Untuk operator +, dicek juga bahwa operand kanan tidak diawali tanda '-', yang terpenuhi.
+### 5. Validasi Subekspresi Kiri: "(4 - 3)"
+- Panggilan : _valid_expr("(4 - 3)")_
+- Proses :
+  - Penggunaan _strip_outer_parentheses_ :
+    - Karena ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruhnya, fungsi menghapus tanda kurung dan mengembalikan "4 - 3".
+  - Pengecekan Operator :
+    - Ekspresi "4 - 3" bukan bilangan dasar.
+   - Saat iterasi operator, operator '-' terdeteksi dengan bantuan _split_by_operator("4 - 3", '-')_.
+   - Split :
+     - Operand kiri : "4"
+     - Operand kanan : "3"
+   - Validasi Base :
+     - _is_base_number("4")_ dan _is_base_number("3")_ mengembalikan _True_.
+   - Hasil : Subekspresi "(4 - 3)" valid.
+### 6. Validasi Subekspresi Kanan: "(( 9 * 2 ) / 3 )"
+- Panggilan : _valid_expr("(( 9 * 2 ) / 3 )")_
+- Proses Awal :
+  - Penggunaan strip_outer_parentheses : <br>
+    Karena seluruh ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruh string, fungsi menghapus tanda kurung paling luar dan mengembalikan :<br>
+    ( 9 * 2 )  / 3
+- Validasi Ekspresi "( 9 * 2 ) / 3" :
+  - Ekspresi ini tidak lagi dibungkus keseluruhan oleh tanda kurung sehingga dilanjutkan ke pengecekan operator.
+  - Iterasi Operator :
+    - Pada iterasi operator, operator '/' ditemukan pada level 0 dengan bantuan _split_by_operator("( 9 * 2 ) / 3", '/')_.
+    - Split :
+      - Operand kiri : "( 9 * 2 )"
+      - Operand kanan : "3"
+  - Validasi Operand Kiri : "( 9 * 2 )":
+    - Strip tanda kurung :
+      - Panggilan strip_outer_parentheses("( 9 * 2 )") menghapus tanda kurung, menghasilkan "9 * 2".
+    - Pengecekan Operator :
+      - Pada "9 * 2", operator '*' ditemukan melalui _split_by_operator("9 * 2", '*')_.
+      - Split :
+        - Operand kiri : "9"
+        - Operand kanan : "2"
+      - Validasi Base :
+        - _is_base_number("9")_ dan _is_base_number("2")_ mengembalikan _True_.
+  - Hasil : "( 9 * 2 )" valid.
+- Validasi Operand Kanan :
+  - "3" merupakan bilangan dasar sehingga valid melalui _is_base_number("3")_.
+- Hasil : Ekspresi "( 9 * 2 ) / 3" valid, dan dengan tanda kurung awal ("(( 9 * 2 ) / 3 )") juga valid.
+### 7. Penggabungan Akhir
+- Kembali ke panggilan _awal valid_expr_ :
+  - Karena kedua subekspresi kiri ("(4 - 3)") dan kanan ("(( 9 * 2 ) / 3 )") valid, operator + menggabungkannya sesuai Rule 3.
+- Hasil Akhir :
+  - Ekspresi **"(4 - 3) + (( 9 * 2 ) / 3 )" valid**.
+### Ringkasan Fungsi dan Peranannya
+- _**is_base_number(s) :**_ <br>
+  Mengecek apakah string s merupakan bilangan tunggal (baik digit tunggal maupun digit dengan tanda minus).
+- _**strip_outer_parentheses(expr) :**_ <br>
+  Menghapus tanda kurung paling luar jika seluruh ekspresi terbungkus oleh tanda kurung, sehingga pengecekan lebih dalam dapat dilakukan.
+- _**split_by_operator(expr, op) :**_  <br>
+  Melakukan scanning terhadap expr dan mencari posisi operator op yang berada di level tanda kurung 0 (di luar tanda kurung), untuk kemudian membagi ekspresi menjadi dua bagian (operand kiri dan kanan).
+- _**valid_expr(expr) :**_ <br>
+  Fungsi rekursif utama yang menggunakan langkah-langkah di atas untuk memverifikasi apakah ekspresi aritmatika valid atau tidak berdasarkan aturan (base case, penggunaan tanda kurung, penanganan unary minus, dan pembentukan ekspresi dengan operator biner).
+### Kesimpulan :
+Melalui iterasi-iterasi tersebut, program memecah ekspresi "(4 - 3) + (( 9 * 2 ) / 3 )" menjadi subekspresi yang lebih kecil, memvalidasi setiap bagian (baik sebagai bilangan dasar, ekspresi dalam tanda kurung, atau ekspresi operator biner), dan akhirnya memastikan bahwa seluruh kalimat aritmatika memenuhi aturan yang telah ditetapkan. Sehingga, output yang diberikan oleh program adalah "**Valid**".
