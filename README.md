@@ -8,11 +8,15 @@
 # Daftar Isi
 ## :sparkles: Binary checker
 - [Binary checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-binary-checker)
+- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
+- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
+- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-pyhton)
+- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
 ## :sparkles: Arithmetic Expression Checker
 - [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-arithmetic-expression-checker)
 - [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
 - [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
-- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python-)
+- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python)
 - [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
   
 # :star: Binary Checker
@@ -91,9 +95,89 @@ Karena seluruh string dapat dihapus menggunakan pola yang valid, maka 010010010 
 ### Kesimpulan
 Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, maka 01010110 adalah **Tidak valid.**
 
+# :herb: Kode Python
+```
+def binary_checker(s):
+    # Daftar pola valid diurutkan berdasarkan panjang menurun agar pola terpanjang diutamakan
+    valid_patterns = ["01001", "010", "10", "00"]
+    
+    # Selama string s belum kosong
+    while s:
+        matched = False
+        # Cek setiap pola apakah menjadi prefix dari s
+        for pattern in valid_patterns:
+            if s.startswith(pattern):
+                # Hapus pola tersebut dari s
+                s = s[len(pattern):]
+                matched = True
+                break  # Keluar dari loop pola jika ada kecocokan
+        # Jika tidak ada pola yang cocok, maka string tidak valid
+        if not matched:
+            return "Tidak valid"
+    
+    # Jika seluruh string telah terhapus (kosong), maka valid
+    return "Valid"
 
 
+def main():
+    # User memasukkan angka biner
+    binary_input = input("Masukkan bilangan biner: ")
+    # Panggil fungsi binary_checker dan tampilkan hasilnya
+    result = binary_checker(binary_input)
+    print(result)
 
+
+if __name__ == "__main__":
+    main()
+```
+# Penjelasan Program
+Berikut penjelasan alur kerja program ketika user menginputkan bilangan **010010010** :
+### **1. Input dan Inisialisasi**
+- User memasukkan string "010010010".
+- Fungsi _binary_checker(s)_ dipanggil dengan s = "010010010".
+- Daftar pola valid didefinisikan sebagai _valid_patterns_ = ["01001", "010", "10", "00"] (diurutkan dari yang terpanjang ke terpendek).
+### Iterasi Pertama (s = "010010010") :
+- Program memasuki loop while karena string belum kosong.
+- Mulai iterasi untuk mencocokkan pola valid :
+  - Pola _"01001"_ : <br>
+    Cek apakah "010010010" diawali dengan "01001". <br>
+    → Cocok, karena 5 karakter pertama adalah "01001".
+   - Pola _"01001"_ cocok, maka dihapus dari awal string. <br>
+     Sisa string menjadi: _"010010010"[5:] = "0010"_.
+- Variabel matched diset ke **True** dan loop for dihentikan dengan break.
+### Iterasi Kedua (s = "0010") :
+- String s sekarang adalah _"0010"_.
+- Masuk lagi ke dalam loop while.
+- Mulai iterasi untuk mencocokkan pola : 
+  - Pola _"01001"_ : <br>
+    Tidak cocok, karena "0010" tidak diawali dengan _"01001"_ (terlalu pendek).
+  - Pola _"010"_ : <br>
+    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"010"_.
+  - Pola _"10"_ : <br>
+    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"10"_.
+  - Pola _"00"_ : <br>
+    Cek apakah "0010" diawali dengan _"00"_. <br>
+    → Cocok.
+- Pola _"00"_ cocok, maka dihapus dari awal string. <br>
+  Sisa string menjadi : _"0010"[2:]_ = _"10"_.
+- Variabel matched diset ke **True** dan loop for dihentikan.
+### Iterasi Ketiga (s = "10") :
+- String s sekarang adalah _"10"_.
+- Masuk lagi ke dalam loop while.
+- Mulai iterasi untuk mencocokkan pola:
+  - Pola _"01001"_ : <br>
+    Tidak cocok karena string hanya 2 karakter.
+  - Pola _"010"_ : <br>
+    Tidak cocok.
+  - Pola _"10"_ : <br>
+    Cek apakah "10" diawali dengan _"10"_. <br>
+    → Cocok.
+- Pola _"10"_ cocok, maka dihapus dari string.
+- Sisa string menjadi : _"10"[2:] = ""_ (string kosong).
+- Variabel matched diset ke **True** dan loop for dihentikan.
+### Penyelesaian
+Loop while berhenti karena string s sudah kosong. <br>
+Fungsi _binary_checker_ mengembalikan **"Valid"** karena seluruh string berhasil dipotong sesuai dengan pola-pola yang ada.
 
 # :star: Arithmetic Expression Checker
 Sebagai seorang intern di software house, anda diminta membuat sebuah aturan rekursif untuk
@@ -159,7 +243,7 @@ Jika x dan y adalah ekspresi aritmatika valid, maka ekspresi yang menggabungkan 
 (4 - 3) + (( 9 * 2 ) / 3) → Valid <br>
 Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar, pembentukan ekspresi sederhana, pembungkus dengan tanda kurung, hingga penggabungan menggunakan operator biner sesuai dengan rules.
 
-## :herb: Kode Python :
+## :herb: Kode Python
 
 ```
 # Fungsi untuk mengecek apakah string s merupakan bilangan dasar (base)
