@@ -6,7 +6,8 @@
 | Mohammad Azhar Aziz | 5025231131 |
 
 # Daftar Isi
-1. Binary checker
+## :sparkles: Binary checker
+- [Binary checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-binary-checker)
 ## :sparkles: Arithmetic Expression Checker
 - [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-arithmetic-expression-checker)
 - [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
@@ -14,6 +15,84 @@
 - [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python-)
 - [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
   
+# :star: Binary Checker
+Anda adalah seorang IT engineer yang ditugasi untuk mereview algoritma rekan anda. <br>
+Fungsi algoritma ini adalah mengevaluasi sekumpulan bit biner. <br>
+Apabila bit tersebut termasuk dalam S*, maka bit dianggap valid. Jika tidak, maka bit tidak valid. <br>
+Diketahui bahwa S didefinisikan sebagai S = {00, 10, 010, 01001} <br>
+Algoritma rekan anda sebagai berikut : <br>
+ 1. Cek satu persatu bit dari paling kiri. Coret deretan bit tersebut jika merupakan bagian dari S <br>
+ 2. Ulangi nomor (1) sampai bit habis atau sampai bit bukan bagian dari S <br>
+ 3. Jika yang tersisa adalah λ, maka bit valid. Jika tersisa selain λ, bit tidak valid <br>
+Apakah algoritma rekan anda ini sudah benar ??? <br>
+
+# :herb: Rules
+### **1. Definisi Himpunan Valid :** 
+  </t> Himpunan pola yang valid didefinisikan sebagai S = {00, 10, 010, 01001}. Artinya, hanya deretan bit yang sesuai dengan salah satu pola ini yang dianggap valid.
+### **2. Pembacaan dari Kiri ke Kanan :** 
+  Algoritma memproses string biner dari bagian paling kiri ke kanan. Pada setiap langkah, algoritma memeriksa apakah bagian awal (prefix) dari string sesuai dengan salah satu pola di S.
+###  **3. Prioritas pada Pola Terpanjang :** 
+  Saat mencocokkan, algoritma memeriksa pola-pola valid dengan urutan _dari yang terpanjang ke yang terpendek_. Pendekatan ini menghindari pencocokan awal dengan pola yang lebih pendek yang mungkin mengakibatkan sisa string tidak dapat diproses dengan benar.
+###  **4. Penghapusan Pola yang Cocok :**
+  Jika ditemukan bahwa awalan string sesuai dengan salah satu pola yang valid, maka bagian tersebut_ "dicoret" (dihapus)_ dari string. Proses ini diulangi untuk sisa string.
+###  **5. Kondisi Validitas :**
+   - Jika _seluruh string dapat dihapus_ secara berurutan menggunakan pola-pola dari S, maka string tersebut dianggap _**valid**_ (berarti string adalah bagian dari S*).
+   - Jika pada suatu titik tidak ada pola yang cocok dengan awalan string, maka string dianggap _**tidak valid**_.
+
+# :herb: Contoh
+## Contoh 1 : 010010010
+### Langkah 1 :
+- String : 010010010
+- Cek prefix : <br>
+  - 01001: Apakah string diawali dengan 01001? → Ya, karena 5 bit pertama adalah 01001.
+- Aksi : Hapus 01001.
+- Sisa string: 0010
+### Langkah 2 :
+- String sisa : 0010
+- Cek prefix : <br>
+  - 01001 : Tidak cocok (karena string sisa hanya 4 bit).
+  - 010 : Apakah 0010 diawali dengan 010? → Tidak, karena 3 bit pertama adalah 001.
+  - 10 : Apakah 0010 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 00.
+  - 00 : Apakah 0010 diawali dengan 00? → Ya, 2 bit pertama adalah 00.
+- Aksi : Hapus 00.
+- Sisa string : 10
+### Langkah 3 :
+- String sisa: 10
+- Cek prefix :
+  - 01001, 010 : Tidak mungkin karena string hanya 2 bit.
+  - 10 : Apakah 10 sama dengan 10? → Ya.
+- Aksi : Hapus 10.
+- Sisa string  λ (kosong)
+### Kesimpulan
+Karena seluruh string dapat dihapus menggunakan pola yang valid, maka 010010010 adalah **Valid**.
+
+## Contoh 2 : 1010110
+### Langkah 1 :
+- String : 01010110
+- Cek prefix :
+  - 01001 : Apakah string diawali dengan 01001? → Tidak, karena 5 bit pertama adalah 01010, bukan 01001.
+  - 010 : Apakah string diawali dengan 010? → Ya, 3 bit pertama adalah 010.
+- Aksi : Hapus 010
+- Sisa string : 10110
+### Langkah 2 :
+- String sisa : 10110
+- Cek prefix 
+  - 01001 & 010 : Tidak cocok, karena string sisa diawali dengan 1.
+  - 10 : Apakah 10110 diawali dengan 10? → Ya, 2 bit pertama adalah 10.
+- Aksi : Hapus 10.
+- Sisa string : 110
+### Langkah 3 :
+- String sisa : 110
+- Cek prefix :
+  - 01001 & 010 : Tidak cocok karena dimulai dengan 1.
+  - 10 : Apakah 110 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 11.
+  - 00 : Tidak cocok karena 11 tidak sama dengan 00.
+- Aksi : Tidak ditemukan pola yang sesuai.
+### Kesimpulan
+Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, maka 01010110 adalah **Tidak valid.**
+
+
+
 
 
 # :star: Arithmetic Expression Checker
