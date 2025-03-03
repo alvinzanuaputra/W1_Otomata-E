@@ -1,262 +1,239 @@
-| Nama           | NRP        | 
-| ---            | ---        | 
-| Alvin Zanua Putra | 5025231064 |
-| Pramudtya Faiz Ardiansyah | 5025231108 |
+| Nama                             | NRP        |
+| -------------------------------- | ---------- |
+| Alvin Zanua Putra                | 5025231064 |
+| Pramudtya Faiz Ardiansyah        | 5025231108 |
 | Christoforus Indra Bagus Pratama | 5025231124 |
-| Muhammad Azhar Aziz | 5025231131 |
+| Muhammad Azhar Aziz              | 5025231131 |
 
 # Daftar Isi
+
 ## :sparkles: Binary checker
-- [Binary checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-binary-checker)
-- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
-- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
-- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python)
-- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
+
+-   [Binary checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-binary-checker)
+-   [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
+-   [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
+-   [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python)
+-   [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
+
 ## :sparkles: Arithmetic Expression Checker
-- [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-arithmetic-expression-checker)
-- [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
-- [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
-- [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python-1)
-- [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
-  
+
+-   [Arithmetic Expression Checker](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#star-arithmetic-expression-checker)
+-   [Rules](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-rules)
+-   [Contoh](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-contoh)
+-   [Kode Python](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-kode-python-1)
+-   [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
+
 # :star: Binary Checker
-Anda adalah seorang IT engineer yang ditugasi untuk mereview algoritma rekan anda. <br>
-Fungsi algoritma ini adalah mengevaluasi sekumpulan bit biner. <br>
-Apabila bit tersebut termasuk dalam S*, maka bit dianggap valid. Jika tidak, maka bit tidak valid. <br>
-Diketahui bahwa S didefinisikan sebagai S = {00, 10, 010, 01001} <br>
-Algoritma rekan anda sebagai berikut : <br>
- 1. Cek satu persatu bit dari paling kiri. Coret deretan bit tersebut jika merupakan bagian dari S <br>
- 2. Ulangi nomor (1) sampai bit habis atau sampai bit bukan bagian dari S <br>
- 3. Jika yang tersisa adalah λ, maka bit valid. Jika tersisa selain λ, bit tidak valid <br>
-Apakah algoritma rekan anda ini sudah benar ??? <br>
+
+Program ini melakukan validasi untuk memastikan bahwa input yang diberikan merupakan bilangan biner yang valid.
 
 # :herb: Rules
-### **1. Definisi Himpunan Valid :** 
-  </t> Himpunan pola yang valid didefinisikan sebagai S = {00, 10, 010, 01001}. Artinya, hanya deretan bit yang sesuai dengan salah satu pola ini yang dianggap valid.
-### **2. Pembacaan dari Kiri ke Kanan :** 
-  Algoritma memproses string biner dari bagian paling kiri ke kanan. Pada setiap langkah, algoritma memeriksa apakah bagian awal (prefix) dari string sesuai dengan salah satu pola di S.
-###  **3. Prioritas pada Pola Terpanjang :** 
-  Saat mencocokkan, algoritma memeriksa pola-pola valid dengan urutan _dari yang terpanjang ke yang terpendek_. Pendekatan ini menghindari pencocokan awal dengan pola yang lebih pendek yang mungkin mengakibatkan sisa string tidak dapat diproses dengan benar.
-###  **4. Penghapusan Pola yang Cocok :**
-  Jika ditemukan bahwa awalan string sesuai dengan salah satu pola yang valid, maka bagian tersebut_ "dicoret" (dihapus)_ dari string. Proses ini diulangi untuk sisa string.
-###  **5. Kondisi Validitas :**
-   - Jika _seluruh string dapat dihapus_ secara berurutan menggunakan pola-pola dari S, maka string tersebut dianggap _**valid**_ (berarti string adalah bagian dari S*).
-   - Jika pada suatu titik tidak ada pola yang cocok dengan awalan string, maka string dianggap _**tidak valid**_.
+
+### **1. Input tidak boleh kosong :**
+
+</t> Program akan mengembalikan "Tidak valid" jika input string kosong. Spasi di awal dan akhir string akan dihapus sebelum pengecekan
+
+### **2. Input hanya boleh terdiri dari angka 0 dan 1 :**
+
+Program akan memeriksa setiap karakter dalam string, jika ditemukan karakter selain 0 atau 1, program akan mengembalikan "Tidak valid". Jika semua karakter adalah 0 atau 1, program akan mengembalikan "Valid"
 
 # :herb: Contoh
-## Contoh 1 : 010010010
-### Langkah 1 :
-- String : 010010010
-- Cek prefix : <br>
-  - 01001: Apakah string diawali dengan 01001? → Ya, karena 5 bit pertama adalah 01001.
-- Aksi : Hapus 01001.
-- Sisa string: 0010
-### Langkah 2 :
-- String sisa : 0010
-- Cek prefix : <br>
-  - 01001 : Tidak cocok (karena string sisa hanya 4 bit).
-  - 010 : Apakah 0010 diawali dengan 010? → Tidak, karena 3 bit pertama adalah 001.
-  - 10 : Apakah 0010 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 00.
-  - 00 : Apakah 0010 diawali dengan 00? → Ya, 2 bit pertama adalah 00.
-- Aksi : Hapus 00.
-- Sisa string : 10
-### Langkah 3 :
-- String sisa: 10
-- Cek prefix :
-  - 01001, 010 : Tidak mungkin karena string hanya 2 bit.
-  - 10 : Apakah 10 sama dengan 10? → Ya.
-- Aksi : Hapus 10.
-- Sisa string  λ (kosong)
-### Kesimpulan
-Karena seluruh string dapat dihapus menggunakan pola yang valid, maka 010010010 adalah **Valid**.
 
-## Contoh 2 : 1010110
+## Contoh 1 : 1010
+
 ### Langkah 1 :
-- String : 01010110
-- Cek prefix :
-  - 01001 : Apakah string diawali dengan 01001? → Tidak, karena 5 bit pertama adalah 01010, bukan 01001.
-  - 010 : Apakah string diawali dengan 010? → Ya, 3 bit pertama adalah 010.
-- Aksi : Hapus 010
-- Sisa string : 10110
+
+-   String : 1010
+-   Menghapus spasi di awal dan akhir string (jika ada)
+-   Memeriksa apakah string kosong → Tidak kosong, lanjut ke langkah berikutnya
+
 ### Langkah 2 :
-- String sisa : 10110
-- Cek prefix 
-  - 01001 & 010 : Tidak cocok, karena string sisa diawali dengan 1.
-  - 10 : Apakah 10110 diawali dengan 10? → Ya, 2 bit pertama adalah 10.
-- Aksi : Hapus 10.
-- Sisa string : 110
-### Langkah 3 :
-- String sisa : 110
-- Cek prefix :
-  - 01001 & 010 : Tidak cocok karena dimulai dengan 1.
-  - 10 : Apakah 110 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 11.
-  - 00 : Tidak cocok karena 11 tidak sama dengan 00.
-- Aksi : Tidak ditemukan pola yang sesuai.
-### Kesimpulan
-Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, maka 01010110 adalah **Tidak valid.**
+
+-   Memeriksa setiap karakter dalam string:
+    -   Karakter 1: '1' → Valid (0 atau 1)
+    -   Karakter 2: '0' → Valid (0 atau 1)
+    -   Karakter 3: '1' → Valid (0 atau 1)
+    -   Karakter 4: '0' → Valid (0 atau 1)
+-   Semua karakter valid, maka string "1010" adalah **Valid**
+
+## Contoh 2 : 102
+
+### Langkah 1 :
+
+-   String : 102
+-   Menghapus spasi di awal dan akhir string (jika ada)
+-   Memeriksa apakah string kosong → Tidak kosong, lanjut ke langkah berikutnya
+
+### Langkah 2 :
+
+-   Memeriksa setiap karakter dalam string:
+    -   Karakter 1: '1' → Valid (0 atau 1)
+    -   Karakter 2: '0' → Valid (0 atau 1)
+    -   Karakter 3: '2' → Tidak Valid (bukan 0 atau 1)
+-   Ditemukan karakter yang tidak valid, maka string "102" adalah **Tidak Valid**
 
 # :herb: Kode Python
+
 ```py
-def binary_checker(s):
-    # Daftar pola valid diurutkan berdasarkan panjang menurun agar pola terpanjang diutamakan
-    valid_patterns = ["01001", "010", "10", "00"]
-    
-    # Selama string s belum kosong
-    while s:
-        matched = False
-        # Cek setiap pola apakah menjadi prefix dari s
-        for pattern in valid_patterns:
-            if s.startswith(pattern):
-                # Hapus pola tersebut dari s
-                s = s[len(pattern):]
-                matched = True
-                break  # Keluar dari loop pola jika ada kecocokan
-        # Jika tidak ada pola yang cocok, maka string tidak valid
-        if not matched:
-            return "Tidak valid"
-    
-    # Jika seluruh string telah terhapus (kosong), maka valid
-    return "Valid"
+def is_binary(s):
+    # Menghapus spasi di awal dan akhir input
+    s = s.strip()
 
+    # Memeriksa apakah input kosong
+    if not s:
+        return False
 
-def main():
-    # User memasukkan angka biner
-    binary_input = input("Masukkan bilangan biner: ")
-    # Panggil fungsi binary_checker dan tampilkan hasilnya
-    result = binary_checker(binary_input)
-    print(result)
+    # Memeriksa apakah setiap karakter dalam input adalah 0 atau 1
+    for i in s:
+        if i != "0" and i != "1":
+            return False
+
+    return True
 
 
 if __name__ == "__main__":
-    main()
+    # User memasukkan angka biner
+    tmp = input("Masukkan bilangan biner: ")
+
+    # Memanggil fungsi untuk memeriksa apakah input adalah bilangan biner
+    if is_binary(tmp):
+        # Jika input adalah bilangan biner, maka akan menampilkan "Valid"
+        print(f"Valid")
+    else:
+        # Jika input bukan bilangan biner, maka akan menampilkan "Tidak valid"
+        print(f"Tidak valid")
 ```
+
 # Penjelasan Program
-Berikut penjelasan alur kerja program ketika user menginputkan bilangan **010010010** :
-### **1. Input dan Inisialisasi**
-- User memasukkan string "010010010".
-- Fungsi _binary_checker(s)_ dipanggil dengan s = "010010010".
-- Daftar pola valid didefinisikan sebagai _valid_patterns_ = ["01001", "010", "10", "00"] (diurutkan dari yang terpanjang ke terpendek).
-### Iterasi Pertama (s = "010010010") :
-- Program memasuki loop while karena string belum kosong.
-- Mulai iterasi untuk mencocokkan pola valid :
-  - Pola _"01001"_ : <br>
-    Cek apakah "010010010" diawali dengan "01001". <br>
-    → Cocok, karena 5 karakter pertama adalah "01001".
-   - Pola _"01001"_ cocok, maka dihapus dari awal string. <br>
-     Sisa string menjadi: _"010010010"[5:] = "0010"_.
-- Variabel matched diset ke **True** dan loop for dihentikan dengan break.
-### Iterasi Kedua (s = "0010") :
-- String s sekarang adalah _"0010"_.
-- Masuk lagi ke dalam loop while.
-- Mulai iterasi untuk mencocokkan pola : 
-  - Pola _"01001"_ : <br>
-    Tidak cocok, karena "0010" tidak diawali dengan _"01001"_ (terlalu pendek).
-  - Pola _"010"_ : <br>
-    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"010"_.
-  - Pola _"10"_ : <br>
-    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"10"_.
-  - Pola _"00"_ : <br>
-    Cek apakah "0010" diawali dengan _"00"_. <br>
-    → Cocok.
-- Pola _"00"_ cocok, maka dihapus dari awal string. <br>
-  Sisa string menjadi : _"0010"[2:]_ = _"10"_.
-- Variabel matched diset ke **True** dan loop for dihentikan.
-### Iterasi Ketiga (s = "10") :
-- String s sekarang adalah _"10"_.
-- Masuk lagi ke dalam loop while.
-- Mulai iterasi untuk mencocokkan pola:
-  - Pola _"01001"_ : <br>
-    Tidak cocok karena string hanya 2 karakter.
-  - Pola _"010"_ : <br>
-    Tidak cocok.
-  - Pola _"10"_ : <br>
-    Cek apakah "10" diawali dengan _"10"_. <br>
-    → Cocok.
-- Pola _"10"_ cocok, maka dihapus dari string.
-- Sisa string menjadi : _"10"[2:] = ""_ (string kosong).
-- Variabel matched diset ke **True** dan loop for dihentikan.
-### Penyelesaian
-Loop while berhenti karena string s sudah kosong. <br>
-Fungsi _binary_checker_ mengembalikan **"Valid"** karena seluruh string berhasil dipotong sesuai dengan pola-pola yang ada.
+
+### 1. Input dan Preprocessing
+
+-   Program meminta user memasukkan string melalui input.
+-   String input akan diproses oleh fungsi `is_binary(s)`.
+-   Langkah pertama adalah menghapus spasi di awal dan akhir string menggunakan `strip()`.
+
+### 2. Validasi Input Kosong
+
+-   Program memeriksa apakah string kosong setelah preprocessing.
+-   Jika string kosong, fungsi mengembalikan `False` (Tidak valid).
+
+### 3. Validasi Karakter
+
+-   Program melakukan iterasi untuk setiap karakter dalam string.
+-   Setiap karakter diperiksa apakah merupakan '0' atau '1'.
+-   Jika ditemukan karakter selain '0' atau '1', fungsi mengembalikan `False` (Tidak valid).
+-   Jika semua karakter valid (0 atau 1), fungsi mengembalikan `True` (Valid).
+
+### 4. Output
+
+-   Program menampilkan "Valid" jika input adalah bilangan biner yang valid.
+-   Program menampilkan "Tidak valid" jika input tidak valid (kosong atau mengandung karakter selain 0 dan 1).
+
+### Kesimpulan
+
+Program ini mengimplementasikan validator sederhana untuk bilangan biner dengan dua aturan utama:
+
+1. Input tidak boleh kosong
+2. Input hanya boleh terdiri dari karakter '0' dan '1'
+
+Program memberikan feedback yang jelas kepada user tentang validitas input yang diberikan, membuatnya mudah digunakan untuk memvalidasi bilangan biner.
 
 # :star: Arithmetic Expression Checker
+
 Sebagai seorang intern di software house, anda diminta membuat sebuah aturan rekursif untuk
 mendefinisikan Kalimat Aritmatika. <br>
-Σ = { 0 1 2 3 4 5 6 7 8 9 + - / * ( ) } <br>
-Cth kalimat artimatika : ( 1 + 9 ) - ( 4 + 5 ) <br>
-Cth kalimat aritmatika invalid : ( 3 + ( 4 - ) 8 ) <br> 
+Σ = { 0 1 2 3 4 5 6 7 8 9 + - / \* ( ) } <br>
+Cth kalimat artimatika : ( 14 + 9 ) - ( 4 + 5 ) <br>
+Cth kalimat aritmatika invalid : ( 3 + ( 4 - ) 8 ) <br>
 
 ## :herb: Rules
-###	Rule 1 (Base Case – Bilangan Dasar) :
--	Bilangan tunggal: Setiap angka tunggal (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) adalah ekspresi aritmatika yang valid.
--	Bilangan negatif tunggal: Setiap angka dengan tanda minus di depannya (misalnya, -1, -2, …, -9) juga valid.
-###	Rule 2 (Pembungkusan dengan Tanda Kurung dan Negasi) :
--	Jika x adalah ekspresi aritmatika valid, maka (x) juga valid.
--	Jika x adalah ekspresi aritmatika valid, maka -(x) juga valid.
-###	Rule 3 (Penggabungan dengan Operator Biner) :
-Jika x dan y adalah ekspresi aritmatika valid, maka ekspresi yang menggabungkan keduanya dengan operator berikut adalah valid :
-- x + y (dengan syarat: operand kanan y tidak diawali dengan tanda minus, untuk membedakan dengan negasi)
-- x - y (dengan syarat yang sama: operand kanan tidak dimulai dengan tanda minus)
-- x * y
-- x / y
 
-## :herb: Contoh 
-### ( 4 - 3 ) + (( 9 * 2 ) / 3)
-- **Iterasi 1** : Pengecekan Bilangan (Base Case) <br>
-  ![( 4 - 3 ) + (( 9  2 )  3 )](https://github.com/user-attachments/assets/2722cd60-9d14-4ae2-b980-abe8a220f697) <br>
-  Angka-angka : 4, 3, 9, 2, dan 3 <br>
-  Semua angka tersebut termasuk dalam base (bilangan tunggal valid).
-- **Iterasi 2** : Pembentukan Ekspresi Sederhana <br>
-   _**Subekspresi (4-3) :**_ 
-  -	Langkah 1 : Ambil 4 dan 3 yang sudah valid.
-  -	Langkah 2 : Gabungkan dengan operator - menggunakan Rule 3 (x – y adalah valid) <br>
-    ![( 4 - 3 ) + (( 9  2 )  3 ) (1)](https://github.com/user-attachments/assets/917b3d95-906c-4b29-8cb4-89f7792c2563) <br>
-    Catatan: Pastikan operand kanan (3) tidak diawali dengan tanda - (syarat terpenuhi).
-  -	Langkah 3 : Hasil 4-3 valid sebagai AE.
-  -	Langkah 4 : Karena ada tanda kurung di sekelilingnya, gunakan Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (4-3) yang juga valid.<br>
-  ![( 4 - 3 ) + (( 9  2 )  3 ) (2)](https://github.com/user-attachments/assets/9aa1b422-726e-41d2-928e-cfce4b68d172) <br>
-   _**Subekspresi (9*2) :**_ 
-  -	Langkah 1 : Ambil 9 dan 2 yang valid.
-  -	Langkah 2 : Gabungkan dengan operator * menggunakan Rule 3 sehingga 9*2 valid (x * y adalah valid). <br>
-    ![( 4 - 3 ) + (( 9  2 )  3 ) (3)](https://github.com/user-attachments/assets/264b486f-1bef-401c-9118-5a2c31fbdbff)
-  - Langkah 3 : Bungkus dengan tanda kurung sesuai Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (9*2) yang valid. <br>
-    ![( 4 - 3 ) + (( 9  2 )  3 ) (4)](https://github.com/user-attachments/assets/5566b243-1573-4938-b6c7-6dd4dff435e3)
-- **Iterasi 3** : Pembentukan Ekspresi Kompleks <br>
-  _**Subekspresi ((9*2) / 3) :**_
-  -	Langkah 1 : Gunakan hasil (9*2) yang sudah valid sebagai x operand kiri.
-  -	Langkah 2 : Operand kanan adalah 3 sebagai y (valid sebagai base).
-  -	Langkah 3 : Gabungkan dengan operator / menggunakan Rule 3 sehingga (9*2)/3 valid. (x / y adalah valid). <br> 
-   ![( 4 - 3 ) + (( 9  2 )  3 ) (5)](https://github.com/user-attachments/assets/f47a0438-7fb5-4b1a-8fcb-dfd262ef1f40)
-  -	Langkah 4 : Bungkus hasil tersebut dengan tanda kurung menggunakan Rule 2 untuk mendapatkan ((9*2)/3) yang valid. (x valid, maka (x) juga valid) <br>
-    ![( 4 - 3 ) + (( 9  2 )  3 ) (6)](https://github.com/user-attachments/assets/1404c8af-4cb1-4aa0-9ff0-2bf6f9543f17)
-- **Iterasi 4** : Penggabungan Akhir <br>
-  Gabungkan kedua subekspresi :
-  -	Operand kiri : (4-3) sebagai x (valid) 
-  -	Operand kanan : ((9*2)/3) sebagai y (valid)
-  -	Operator : + <br>
-    Rule 3 : Untuk operator +, pastikan operand kanan tidak dimulai dengan - (syarat terpenuhi). (x + y adalah valid). <br>
-    ![( 4 - 3 ) + (( 9  2 )  3 ) (7)](https://github.com/user-attachments/assets/1ba6961c-fcbb-4e75-bf4b-1c26c9e23d9e)
--	**Hasil** : (4-3)+((9*2)/3) merupakan ekspresi aritmatika yang **valid**.
-  ![( 4 - 3 ) + (( 9  2 )  3 ) (8)](https://github.com/user-attachments/assets/d943bee1-2801-4917-bddb-4edc7da89d5d)
+### Rule 1 (Base Case – Bilangan Dasar) :
+
+-   Bilangan: Setiap angka (termasuk multi-digit, contoh: 14, 123, 4567) adalah ekspresi aritmatika yang valid.
+-   Bilangan negatif: Setiap angka dengan tanda minus di depannya (misalnya, -14, -123, -4567) juga valid.
+
+### Rule 2 (Pembungkusan dengan Tanda Kurung dan Negasi) :
+
+-   Jika x adalah ekspresi aritmatika valid, maka (x) juga valid.
+-   Jika x adalah ekspresi aritmatika valid, maka -(x) juga valid.
+
+### Rule 3 (Penggabungan dengan Operator Biner) :
+
+Jika x dan y adalah ekspresi aritmatika valid, maka ekspresi yang menggabungkan keduanya dengan operator berikut adalah valid :
+
+-   x + y (dengan syarat: operand kanan y tidak diawali dengan tanda minus, untuk membedakan dengan negasi)
+-   x - y (dengan syarat yang sama: operand kanan tidak dimulai dengan tanda minus)
+-   x \* y
+-   x / y
+
+## :herb: Contoh
+
+### ( 14 - 3 ) + (( 19 \* 2 ) / 3)
+
+-   **Iterasi 1** : Pengecekan Bilangan (Base Case) <br>
+    ![( 4 - 3 ) + (( 9  2 )  3 )](https://github.com/user-attachments/assets/2722cd60-9d14-4ae2-b980-abe8a220f697) <br>
+    Angka-angka : 14, 3, 19, 2, dan 3 <br>
+    Semua angka tersebut termasuk dalam base (bilangan valid).
+-   **Iterasi 2** : Pembentukan Ekspresi Sederhana <br>
+    _**Subekspresi (14-3) :**_
+    -   Langkah 1 : Ambil 14 dan 3 yang sudah valid.
+    -   Langkah 2 : Gabungkan dengan operator - menggunakan Rule 3 (x – y adalah valid) <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (1)](https://github.com/user-attachments/assets/917b3d95-906c-4b29-8cb4-89f7792c2563) <br>
+        Catatan: Pastikan operand kanan (3) tidak diawali dengan tanda - (syarat terpenuhi).
+    -   Langkah 3 : Hasil 14-3 valid sebagai AE.
+    -   Langkah 4 : Karena ada tanda kurung di sekelilingnya, gunakan Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (14-3) yang juga valid.<br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (2)](https://github.com/user-attachments/assets/9aa1b422-726e-41d2-928e-cfce4b68d172) <br>
+        _**Subekspresi (19\*2) :**_
+    -   Langkah 1 : Ambil 19 dan 2 yang valid.
+    -   Langkah 2 : Gabungkan dengan operator * menggunakan Rule 3 sehingga 19*2 valid (x \* y adalah valid). <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (3)](https://github.com/user-attachments/assets/264b486f-1bef-401c-9118-5a2c31fbdbff)
+    -   Langkah 3 : Bungkus dengan tanda kurung sesuai Rule 2 (x valid, maka (x) juga valid) untuk mendapatkan (19\*2) yang valid. <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (4)](https://github.com/user-attachments/assets/5566b243-1573-4938-b6c7-6dd4dff435e3)
+-   **Iterasi 3** : Pembentukan Ekspresi Kompleks <br>
+    _**Subekspresi ((19\*2) / 3) :**_
+    -   Langkah 1 : Gunakan hasil (19\*2) yang sudah valid sebagai x operand kiri.
+    -   Langkah 2 : Operand kanan adalah 3 sebagai y (valid sebagai base).
+    -   Langkah 3 : Gabungkan dengan operator / menggunakan Rule 3 sehingga (19\*2)/3 valid. (x / y adalah valid). <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (5)](https://github.com/user-attachments/assets/f47a0438-7fb5-4b1a-8fcb-dfd262ef1f40)
+    -   Langkah 4 : Bungkus hasil tersebut dengan tanda kurung menggunakan Rule 2 untuk mendapatkan ((19\*2)/3) yang valid. (x valid, maka (x) juga valid) <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (6)](https://github.com/user-attachments/assets/1404c8af-4cb1-4aa0-9ff0-2bf6f9543f17)
+-   **Iterasi 4** : Penggabungan Akhir <br>
+    Gabungkan kedua subekspresi :
+    -   Operand kiri : (14-3) sebagai x (valid)
+    -   Operand kanan : ((19\*2)/3) sebagai y (valid)
+    -   Operator : + <br>
+        Rule 3 : Untuk operator +, pastikan operand kanan tidak dimulai dengan - (syarat terpenuhi). (x + y adalah valid). <br>
+        ![( 4 - 3 ) + (( 9  2 )  3 ) (7)](https://github.com/user-attachments/assets/1ba6961c-fcbb-4e75-bf4b-1c26c9e23d9e)
+-   **Hasil** : (14-3)+((19\*2)/3) merupakan ekspresi aritmatika yang **valid**.
+    ![( 4 - 3 ) + (( 9  2 )  3 ) (8)](https://github.com/user-attachments/assets/d943bee1-2801-4917-bddb-4edc7da89d5d)
 
 **Kesimpulan** <br>
-(4 - 3) + (( 9 * 2 ) / 3) → Valid <br>
-Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar, pembentukan ekspresi sederhana, pembungkus dengan tanda kurung, hingga penggabungan menggunakan operator biner sesuai dengan rules.
+(14 - 3) + ((19 \* 2) / 3) → Valid <br>
+Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar (termasuk multi-digit), pembentukan ekspresi sederhana, pembungkus dengan tanda kurung, hingga penggabungan menggunakan operator biner sesuai dengan rules.
 
 ## :herb: Kode Python
 
 ```py
 # Fungsi untuk mengecek apakah string s merupakan bilangan dasar (base)
-# Base: bilangan tunggal (0-9) atau bilangan negatif tunggal (-1 sampai -9)
+# Base: bilangan (dapat berupa multi-digit) atau bilangan negatif
 def is_base_number(s):
     s = s.strip()
-    # Jika hanya 1 karakter dan merupakan digit, maka valid
-    if len(s) == 1 and s.isdigit():
-        return True
-    # Jika ada tanda minus di depan dan 1 digit setelahnya, maka valid
-    if len(s) == 2 and s[0] == '-' and s[1].isdigit():
-        return True
-    return False
+    if not s:
+        return False
+
+    # Handle negative numbers
+    if s.startswith('-'):
+        s = s[1:]  # Remove minus sign for checking
+        if not s:  # If only minus sign
+            return False
+
+    # Check if it's a valid whole number (no decimals)
+    for char in s:
+        if not char.isdigit():
+            return False
+
+    return True
 
 # Fungsi untuk menghapus tanda kurung paling luar jika memang mengelilingi seluruh ekspresi.
 def strip_outer_parentheses(expr):
@@ -342,97 +319,116 @@ def valid_expr(expr):
     return False
 
 # Main program: meminta input dari user dan menampilkan hasil valid atau tidak valid.
-if __name__ == '__main__':
-    # User dapat memasukkan kalimat aritmatika (misalnya: (4-3)+((9*2)/3) atau 3-(9+)+5-3)
+if __name__ == "__main__":
+    # User dapat memasukkan kalimat aritmatika (misalnya: (14-3)+((19*2)/3) atau 13-(9+)+5-3)
     expr_input = input("Masukkan kalimat aritmatika: ")
     if valid_expr(expr_input):
         print("Valid")
     else:
         print("Tidak Valid")
 ```
+
 ## :herb: Penjelasan Program
+
 ### 1. Panggilan Awal
-- Fungsi yang dipanggil : _valid_expr(expr)_
-- Input : "(4 - 3) + (( 9 * 2 ) / 3 )" <br>
-- Langkah awal :
-  - Ekspresi di-strip (menghilangkan spasi awal/akhir).
-  - Fungsi _is_base_number(expr)_ dipanggil, tetapi karena ekspresi lebih kompleks (tidak hanya satu angka), ia mengembalikan _False_.
+
+-   Fungsi yang dipanggil : _valid_expr(expr)_
+-   Input : "(14 - 3) + ((19 \* 2) / 3)" <br>
+-   Langkah awal :
+    -   Ekspresi di-strip (menghilangkan spasi awal/akhir).
+    -   Fungsi _is_base_number(expr)_ dipanggil, tetapi karena ekspresi lebih kompleks (tidak hanya satu angka), ia mengembalikan _False_.
+
 ### 2. Pengecekan Tanda Kurung Paling Luar
-- Fungsi yang dipakai : _strip_outer_parentheses(expr)_
-- Proses :
-  - Program mengecek apakah seluruh ekspresi diawali dan diakhiri oleh tanda kurung yang benar.
-  - Karena operator + berada di luar tanda kurung, fungsi mendeteksi bahwa tanda kurung paling luar tidak mencakup seluruh ekspresi, sehingga tidak mengubah string.
-- Hasil : Ekspresi tetap "(4 - 3) + (( 9 * 2 ) / 3 )".
+
+-   Fungsi yang dipakai : _strip_outer_parentheses(expr)_
+-   Proses :
+    -   Program mengecek apakah seluruh ekspresi diawali dan diakhiri oleh tanda kurung yang benar.
+    -   Karena operator + berada di luar tanda kurung, fungsi mendeteksi bahwa tanda kurung paling luar tidak mencakup seluruh ekspresi, sehingga tidak mengubah string.
+-   Hasil : Ekspresi tetap "(14 - 3) + ((19 \* 2) / 3)".
+
 ### 3. Pengecekan Unary Minus
-- Proses :
-  - Program memeriksa apakah ekspresi diawali dengan tanda '-' untuk menangani kasus negasi unary.
-  - Pada input ini, tidak ada unary minus di awal sehingga lanjut ke langkah berikutnya.
+
+-   Proses :
+    -   Program memeriksa apakah ekspresi diawali dengan tanda '-' untuk menangani kasus negasi unary.
+    -   Pada input ini, tidak ada unary minus di awal sehingga lanjut ke langkah berikutnya.
+
 ### 4. Pengecekan Operator Biner
-- Daftar Operator : ['**', '+', '-', '*', '/']
-- Iterasi atas operator :
-  - Operator '**' : Tidak ditemukan pada level terluar.
-  - Operator '+' :
-    - Fungsi yang dipakai : _split_by_operator(expr, '+')_
-    - Program melakukan scanning dari awal ke akhir dengan variabel depth untuk melacak level tanda kurung.
-    - Saat depth == 0, operator + terdeteksi di antara dua subekspresi.
-    - Hasil Split :
-      - Operand kiri (left) : "(4 - 3)"
-      - Operand kanan (right) : "(( 9 * 2 ) / 3 )"
-    - Untuk operator +, dicek juga bahwa operand kanan tidak diawali tanda '-', yang terpenuhi.
-### 5. Validasi Subekspresi Kiri: "(4 - 3)"
-- Panggilan : _valid_expr("(4 - 3)")_
-- Proses :
-  - Penggunaan _strip_outer_parentheses_ :
-    - Karena ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruhnya, fungsi menghapus tanda kurung dan mengembalikan "4 - 3".
-  - Pengecekan Operator :
-    - Ekspresi "4 - 3" bukan bilangan dasar.
-   - Saat iterasi operator, operator '-' terdeteksi dengan bantuan _split_by_operator("4 - 3", '-')_.
-   - Split :
-     - Operand kiri : "4"
-     - Operand kanan : "3"
-   - Validasi Base :
-     - _is_base_number("4")_ dan _is_base_number("3")_ mengembalikan _True_.
-   - Hasil : Subekspresi "(4 - 3)" valid.
-### 6. Validasi Subekspresi Kanan: "(( 9 * 2 ) / 3 )"
-- Panggilan : _valid_expr("(( 9 * 2 ) / 3 )")_
-- Proses Awal :
-  - Penggunaan strip_outer_parentheses : <br>
-    Karena seluruh ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruh string, fungsi menghapus tanda kurung paling luar dan mengembalikan :<br>
-    ( 9 * 2 )  / 3
-- Validasi Ekspresi "( 9 * 2 ) / 3" :
-  - Ekspresi ini tidak lagi dibungkus keseluruhan oleh tanda kurung sehingga dilanjutkan ke pengecekan operator.
-  - Iterasi Operator :
-    - Pada iterasi operator, operator '/' ditemukan pada level 0 dengan bantuan _split_by_operator("( 9 * 2 ) / 3", '/')_.
-    - Split :
-      - Operand kiri : "( 9 * 2 )"
-      - Operand kanan : "3"
-  - Validasi Operand Kiri : "( 9 * 2 )":
-    - Strip tanda kurung :
-      - Panggilan strip_outer_parentheses("( 9 * 2 )") menghapus tanda kurung, menghasilkan "9 * 2".
-    - Pengecekan Operator :
-      - Pada "9 * 2", operator '*' ditemukan melalui _split_by_operator("9 * 2", '*')_.
-      - Split :
-        - Operand kiri : "9"
-        - Operand kanan : "2"
-      - Validasi Base :
-        - _is_base_number("9")_ dan _is_base_number("2")_ mengembalikan _True_.
-  - Hasil : "( 9 * 2 )" valid.
-- Validasi Operand Kanan :
-  - "3" merupakan bilangan dasar sehingga valid melalui _is_base_number("3")_.
-- Hasil : Ekspresi "( 9 * 2 ) / 3" valid, dan dengan tanda kurung awal ("(( 9 * 2 ) / 3 )") juga valid.
+
+-   Daftar Operator : ['**', '+', '-', '*', '/']
+-   Iterasi atas operator :
+    -   Operator '\*\*' : Tidak ditemukan pada level terluar.
+    -   Operator '+' :
+        -   Fungsi yang dipakai : _split_by_operator(expr, '+')_
+        -   Program melakukan scanning dari awal ke akhir dengan variabel depth untuk melacak level tanda kurung.
+        -   Saat depth == 0, operator + terdeteksi di antara dua subekspresi.
+        -   Hasil Split :
+            -   Operand kiri (left) : "(14 - 3)"
+            -   Operand kanan (right) : "((19 \* 2) / 3)"
+        -   Untuk operator +, dicek juga bahwa operand kanan tidak diawali tanda '-', yang terpenuhi.
+
+### 5. Validasi Subekspresi Kiri: "(14 - 3)"
+
+-   Panggilan : _valid_expr("(14 - 3)")_
+-   Proses :
+    -   Penggunaan _strip_outer_parentheses_ :
+        -   Karena ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruhnya, fungsi menghapus tanda kurung dan mengembalikan "14 - 3".
+    -   Pengecekan Operator :
+        -   Ekspresi "14 - 3" bukan bilangan dasar.
+    -   Saat iterasi operator, operator '-' terdeteksi dengan bantuan _split_by_operator("14 - 3", '-')_.
+    -   Split :
+        -   Operand kiri : "14"
+        -   Operand kanan : "3"
+    -   Validasi Base :
+        -   _is_base_number("14")_ dan _is_base_number("3")_ mengembalikan _True_.
+    -   Hasil : Subekspresi "(14 - 3)" valid.
+
+### 6. Validasi Subekspresi Kanan: "((19 \* 2) / 3)"
+
+-   Panggilan : _valid_expr("((19 \* 2) / 3)")_
+-   Proses Awal :
+    -   Penggunaan strip_outer_parentheses : <br>
+        Karena seluruh ekspresi diawali dan diakhiri tanda kurung yang mencakup seluruh string, fungsi menghapus tanda kurung paling luar dan mengembalikan :<br>
+        (19 \* 2) / 3
+-   Validasi Ekspresi "(19 \* 2) / 3" :
+    -   Ekspresi ini tidak lagi dibungkus keseluruhan oleh tanda kurung sehingga dilanjutkan ke pengecekan operator.
+    -   Iterasi Operator :
+        -   Pada iterasi operator, operator '/' ditemukan pada level 0 dengan bantuan _split_by_operator("(19 \* 2) / 3", '/')_.
+        -   Split :
+            -   Operand kiri : "(19 \* 2)"
+            -   Operand kanan : "3"
+    -   Validasi Operand Kiri : "(19 \* 2)":
+        -   Strip tanda kurung :
+            -   Panggilan strip*outer_parentheses("(19 * 2)") menghapus tanda kurung, menghasilkan "19 \_ 2".
+        -   Pengecekan Operator :
+            -   Pada "19 _ 2", operator '_' ditemukan melalui _split_by_operator("19 * 2", '*')_.
+            -   Split :
+                -   Operand kiri : "19"
+                -   Operand kanan : "2"
+            -   Validasi Base :
+                -   _is_base_number("19")_ dan _is_base_number("2")_ mengembalikan _True_.
+    -   Hasil : "(19 \* 2)" valid.
+-   Validasi Operand Kanan :
+    -   "3" merupakan bilangan dasar sehingga valid melalui _is_base_number("3")_.
+-   Hasil : Ekspresi "(19 _ 2) / 3" valid, dan dengan tanda kurung awal ("((19 _ 2) / 3)") juga valid.
+
 ### 7. Penggabungan Akhir
-- Kembali ke panggilan _awal valid_expr_ :
-  - Karena kedua subekspresi kiri ("(4 - 3)") dan kanan ("(( 9 * 2 ) / 3 )") valid, operator + menggabungkannya sesuai Rule 3.
-- Hasil Akhir :
-  - Ekspresi **"(4 - 3) + (( 9 * 2 ) / 3 )" valid**.
+
+-   Kembali ke panggilan _awal valid_expr_ :
+    -   Karena kedua subekspresi kiri ("(14 - 3)") dan kanan ("((19 \* 2) / 3)") valid, operator + menggabungkannya sesuai Rule 3.
+-   Hasil Akhir :
+    -   Ekspresi **"(14 - 3) + ((19 \* 2) / 3)" valid**.
+
 ### Ringkasan Fungsi dan Peranannya
-- _**is_base_number(s) :**_ <br>
-  Mengecek apakah string s merupakan bilangan tunggal (baik digit tunggal maupun digit dengan tanda minus).
-- _**strip_outer_parentheses(expr) :**_ <br>
-  Menghapus tanda kurung paling luar jika seluruh ekspresi terbungkus oleh tanda kurung, sehingga pengecekan lebih dalam dapat dilakukan.
-- _**split_by_operator(expr, op) :**_  <br>
-  Melakukan scanning terhadap expr dan mencari posisi operator op yang berada di level tanda kurung 0 (di luar tanda kurung), untuk kemudian membagi ekspresi menjadi dua bagian (operand kiri dan kanan).
-- _**valid_expr(expr) :**_ <br>
-  Fungsi rekursif utama yang menggunakan langkah-langkah di atas untuk memverifikasi apakah ekspresi aritmatika valid atau tidak berdasarkan aturan (base case, penggunaan tanda kurung, penanganan unary minus, dan pembentukan ekspresi dengan operator biner).
+
+-   _**is_base_number(s) :**_ <br>
+    Mengecek apakah string s merupakan bilangan (termasuk multi-digit) atau bilangan dengan tanda minus.
+-   _**strip_outer_parentheses(expr) :**_ <br>
+    Menghapus tanda kurung paling luar jika seluruh ekspresi terbungkus oleh tanda kurung, sehingga pengecekan lebih dalam dapat dilakukan.
+-   _**split_by_operator(expr, op) :**_ <br>
+    Melakukan scanning terhadap expr dan mencari posisi operator op yang berada di level tanda kurung 0 (di luar tanda kurung), untuk kemudian membagi ekspresi menjadi dua bagian (operand kiri dan kanan).
+-   _**valid_expr(expr) :**_ <br>
+    Fungsi rekursif utama yang menggunakan langkah-langkah di atas untuk memverifikasi apakah ekspresi aritmatika valid atau tidak berdasarkan aturan (base case, penggunaan tanda kurung, penanganan unary minus, dan pembentukan ekspresi dengan operator biner).
+
 ### Kesimpulan :
-Melalui iterasi-iterasi tersebut, program memecah ekspresi "(4 - 3) + (( 9 * 2 ) / 3 )" menjadi subekspresi yang lebih kecil, memvalidasi setiap bagian (baik sebagai bilangan dasar, ekspresi dalam tanda kurung, atau ekspresi operator biner), dan akhirnya memastikan bahwa seluruh kalimat aritmatika memenuhi aturan yang telah ditetapkan. Sehingga, output yang diberikan oleh program adalah "**Valid**".
+
+Melalui iterasi-iterasi tersebut, program memecah ekspresi "(14 - 3) + ((19 \* 2) / 3)" menjadi subekspresi yang lebih kecil, memvalidasi setiap bagian (baik sebagai bilangan dasar, ekspresi dalam tanda kurung, atau ekspresi operator biner), dan akhirnya memastikan bahwa seluruh kalimat aritmatika memenuhi aturan yang telah ditetapkan. Program ini dapat menangani bilangan multi-digit, membuat validasi lebih komprehensif untuk ekspresi aritmatika. Sehingga, output yang diberikan oleh program adalah "**Valid**".
