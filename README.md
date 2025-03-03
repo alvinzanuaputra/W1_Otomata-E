@@ -96,7 +96,7 @@ Karena seluruh string dapat dihapus menggunakan pola yang valid, maka 010010010 
 Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, maka 01010110 adalah **Tidak valid.**
 
 # :herb: Kode Python
-```
+```py
 def binary_checker(s):
     # Daftar pola valid diurutkan berdasarkan panjang menurun agar pola terpanjang diutamakan
     valid_patterns = ["01001", "010", "10", "00"]
@@ -245,7 +245,7 @@ Dikarenakan setiap subekspresi berhasil diverifikasi mulai dari bilangan dasar, 
 
 ## :herb: Kode Python
 
-```
+```py
 # Fungsi untuk mengecek apakah string s merupakan bilangan dasar (base)
 # Base: bilangan tunggal (0-9) atau bilangan negatif tunggal (-1 sampai -9)
 def is_base_number(s):
