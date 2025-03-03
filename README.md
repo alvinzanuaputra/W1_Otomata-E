@@ -3,7 +3,7 @@
 | Alvin Zanua Putra | 5025231064 |
 | Pramudtya Faiz Ardiansyah | 5025231108 |
 | Christoforus Indra Bagus Pratama | 5025231124 |
-| Mohammad Azhar Aziz | 5025231131 |
+| Muhammad Azhar Aziz | 5025231131 |
 
 # Daftar Isi
 ## :sparkles: Binary checker
