@@ -24,120 +24,164 @@
 -   [Penjelasan Program](https://github.com/alvinzanuaputra/W1_Otomata-E/blob/main/README.md#herb-penjelasan-program)
 
 # :star: Binary Checker
-
-Program ini melakukan validasi untuk memastikan bahwa input yang diberikan merupakan bilangan biner yang valid.
+Anda adalah seorang IT engineer yang ditugasi untuk mereview algoritma rekan anda. <br>
+Fungsi algoritma ini adalah mengevaluasi sekumpulan bit biner. <br>
+Apabila bit tersebut termasuk dalam S*, maka bit dianggap valid. Jika tidak, maka bit tidak valid. <br>
+Diketahui bahwa S didefinisikan sebagai S = {00, 10, 010, 01001} <br>
+Algoritma rekan anda sebagai berikut : <br>
+ 1. Cek satu persatu bit dari paling kiri. Coret deretan bit tersebut jika merupakan bagian dari S <br>
+ 2. Ulangi nomor (1) sampai bit habis atau sampai bit bukan bagian dari S <br>
+ 3. Jika yang tersisa adalah λ, maka bit valid. Jika tersisa selain λ, bit tidak valid <br>
+Apakah algoritma rekan anda ini sudah benar ??? <br>
 
 # :herb: Rules
-
-### **1. Input tidak boleh kosong :**
-
-</t> Program akan mengembalikan "Tidak valid" jika input string kosong. Spasi di awal dan akhir string akan dihapus sebelum pengecekan
-
-### **2. Input hanya boleh terdiri dari angka 0 dan 1 :**
-
-Program akan memeriksa setiap karakter dalam string, jika ditemukan karakter selain 0 atau 1, program akan mengembalikan "Tidak valid". Jika semua karakter adalah 0 atau 1, program akan mengembalikan "Valid"
+### **1. Definisi Himpunan Valid :** 
+  </t> Himpunan pola yang valid didefinisikan sebagai S = {00, 10, 010, 01001}. Artinya, hanya deretan bit yang sesuai dengan salah satu pola ini yang dianggap valid.
+### **2. Pembacaan dari Kiri ke Kanan :** 
+  Algoritma memproses string biner dari bagian paling kiri ke kanan. Pada setiap langkah, algoritma memeriksa apakah bagian awal (prefix) dari string sesuai dengan salah satu pola di S.
+###  **3. Prioritas pada Pola Terpanjang :** 
+  Saat mencocokkan, algoritma memeriksa pola-pola valid dengan urutan _dari yang terpanjang ke yang terpendek_. Pendekatan ini menghindari pencocokan awal dengan pola yang lebih pendek yang mungkin mengakibatkan sisa string tidak dapat diproses dengan benar.
+###  **4. Penghapusan Pola yang Cocok :**
+  Jika ditemukan bahwa awalan string sesuai dengan salah satu pola yang valid, maka bagian tersebut_ "dicoret" (dihapus)_ dari string. Proses ini diulangi untuk sisa string.
+###  **5. Kondisi Validitas :**
+   - Jika _seluruh string dapat dihapus_ secara berurutan menggunakan pola-pola dari S, maka string tersebut dianggap _**valid**_ (berarti string adalah bagian dari S*).
+   - Jika pada suatu titik tidak ada pola yang cocok dengan awalan string, maka string dianggap _**tidak valid**_.
 
 # :herb: Contoh
-
-## Contoh 1 : 1010
-
+## Contoh 1 : 010010010
 ### Langkah 1 :
-
--   String : 1010
--   Menghapus spasi di awal dan akhir string (jika ada)
--   Memeriksa apakah string kosong → Tidak kosong, lanjut ke langkah berikutnya
-
+- String : 010010010
+- Cek prefix : <br>
+  - 01001: Apakah string diawali dengan 01001? → Ya, karena 5 bit pertama adalah 01001.
+- Aksi : Hapus 01001.
+- Sisa string: 0010
 ### Langkah 2 :
+- String sisa : 0010
+- Cek prefix : <br>
+  - 01001 : Tidak cocok (karena string sisa hanya 4 bit).
+  - 010 : Apakah 0010 diawali dengan 010? → Tidak, karena 3 bit pertama adalah 001.
+  - 10 : Apakah 0010 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 00.
+  - 00 : Apakah 0010 diawali dengan 00? → Ya, 2 bit pertama adalah 00.
+- Aksi : Hapus 00.
+- Sisa string : 10
+### Langkah 3 :
+- String sisa: 10
+- Cek prefix :
+  - 01001, 010 : Tidak mungkin karena string hanya 2 bit.
+  - 10 : Apakah 10 sama dengan 10? → Ya.
+- Aksi : Hapus 10.
+- Sisa string  λ (kosong)
+### Kesimpulan
+Karena seluruh string dapat dihapus menggunakan pola yang valid, maka 010010010 adalah **Valid**.
 
--   Memeriksa setiap karakter dalam string:
-    -   Karakter 1: '1' → Valid (0 atau 1)
-    -   Karakter 2: '0' → Valid (0 atau 1)
-    -   Karakter 3: '1' → Valid (0 atau 1)
-    -   Karakter 4: '0' → Valid (0 atau 1)
--   Semua karakter valid, maka string "1010" adalah **Valid**
-
-## Contoh 2 : 102
-
+## Contoh 2 : 1010110
 ### Langkah 1 :
-
--   String : 102
--   Menghapus spasi di awal dan akhir string (jika ada)
--   Memeriksa apakah string kosong → Tidak kosong, lanjut ke langkah berikutnya
-
+- String : 01010110
+- Cek prefix :
+  - 01001 : Apakah string diawali dengan 01001? → Tidak, karena 5 bit pertama adalah 01010, bukan 01001.
+  - 010 : Apakah string diawali dengan 010? → Ya, 3 bit pertama adalah 010.
+- Aksi : Hapus 010
+- Sisa string : 10110
 ### Langkah 2 :
-
--   Memeriksa setiap karakter dalam string:
-    -   Karakter 1: '1' → Valid (0 atau 1)
-    -   Karakter 2: '0' → Valid (0 atau 1)
-    -   Karakter 3: '2' → Tidak Valid (bukan 0 atau 1)
--   Ditemukan karakter yang tidak valid, maka string "102" adalah **Tidak Valid**
+- String sisa : 10110
+- Cek prefix 
+  - 01001 & 010 : Tidak cocok, karena string sisa diawali dengan 1.
+  - 10 : Apakah 10110 diawali dengan 10? → Ya, 2 bit pertama adalah 10.
+- Aksi : Hapus 10.
+- Sisa string : 110
+### Langkah 3 :
+- String sisa : 110
+- Cek prefix :
+  - 01001 & 010 : Tidak cocok karena dimulai dengan 1.
+  - 10 : Apakah 110 diawali dengan 10? → Tidak, karena 2 bit pertama adalah 11.
+  - 00 : Tidak cocok karena 11 tidak sama dengan 00.
+- Aksi : Tidak ditemukan pola yang sesuai.
+### Kesimpulan
+Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, maka 01010110 adalah **Tidak valid.**
 
 # :herb: Kode Python
-
 ```py
-def is_binary(s):
-    # Menghapus spasi di awal dan akhir input
-    s = s.strip()
+def binary_checker(s):
+    # Daftar pola valid diurutkan berdasarkan panjang menurun agar pola terpanjang diutamakan
+    valid_patterns = ["01001", "010", "10", "00"]
+    
+    # Selama string s belum kosong
+    while s:
+        matched = False
+        # Cek setiap pola apakah menjadi prefix dari s
+        for pattern in valid_patterns:
+            if s.startswith(pattern):
+                # Hapus pola tersebut dari s
+                s = s[len(pattern):]
+                matched = True
+                break  # Keluar dari loop pola jika ada kecocokan
+        # Jika tidak ada pola yang cocok, maka string tidak valid
+        if not matched:
+            return "Tidak valid"
+    
+    # Jika seluruh string telah terhapus (kosong), maka valid
+    return "Valid"
 
-    # Memeriksa apakah input kosong
-    if not s:
-        return False
 
-    # Memeriksa apakah setiap karakter dalam input adalah 0 atau 1
-    for i in s:
-        if i != "0" and i != "1":
-            return False
-
-    return True
+def main():
+    # User memasukkan angka biner
+    binary_input = input("Masukkan bilangan biner: ")
+    # Panggil fungsi binary_checker dan tampilkan hasilnya
+    result = binary_checker(binary_input)
+    print(result)
 
 
 if __name__ == "__main__":
-    # User memasukkan angka biner
-    tmp = input("Masukkan bilangan biner: ")
-
-    # Memanggil fungsi untuk memeriksa apakah input adalah bilangan biner
-    if is_binary(tmp):
-        # Jika input adalah bilangan biner, maka akan menampilkan "Valid"
-        print(f"Valid")
-    else:
-        # Jika input bukan bilangan biner, maka akan menampilkan "Tidak valid"
-        print(f"Tidak valid")
+    main()
 ```
-
 # Penjelasan Program
-
-### 1. Input dan Preprocessing
-
--   Program meminta user memasukkan string melalui input.
--   String input akan diproses oleh fungsi `is_binary(s)`.
--   Langkah pertama adalah menghapus spasi di awal dan akhir string menggunakan `strip()`.
-
-### 2. Validasi Input Kosong
-
--   Program memeriksa apakah string kosong setelah preprocessing.
--   Jika string kosong, fungsi mengembalikan `False` (Tidak valid).
-
-### 3. Validasi Karakter
-
--   Program melakukan iterasi untuk setiap karakter dalam string.
--   Setiap karakter diperiksa apakah merupakan '0' atau '1'.
--   Jika ditemukan karakter selain '0' atau '1', fungsi mengembalikan `False` (Tidak valid).
--   Jika semua karakter valid (0 atau 1), fungsi mengembalikan `True` (Valid).
-
-### 4. Output
-
--   Program menampilkan "Valid" jika input adalah bilangan biner yang valid.
--   Program menampilkan "Tidak valid" jika input tidak valid (kosong atau mengandung karakter selain 0 dan 1).
-
-### Kesimpulan
-
-Program ini mengimplementasikan validator sederhana untuk bilangan biner dengan dua aturan utama:
-
-1. Input tidak boleh kosong
-2. Input hanya boleh terdiri dari karakter '0' dan '1'
-
-Program memberikan feedback yang jelas kepada user tentang validitas input yang diberikan, membuatnya mudah digunakan untuk memvalidasi bilangan biner.
-
+Berikut penjelasan alur kerja program ketika user menginputkan bilangan **010010010** :
+### **1. Input dan Inisialisasi**
+- User memasukkan string "010010010".
+- Fungsi _binary_checker(s)_ dipanggil dengan s = "010010010".
+- Daftar pola valid didefinisikan sebagai _valid_patterns_ = ["01001", "010", "10", "00"] (diurutkan dari yang terpanjang ke terpendek).
+### Iterasi Pertama (s = "010010010") :
+- Program memasuki loop while karena string belum kosong.
+- Mulai iterasi untuk mencocokkan pola valid :
+  - Pola _"01001"_ : <br>
+    Cek apakah "010010010" diawali dengan "01001". <br>
+    → Cocok, karena 5 karakter pertama adalah "01001".
+   - Pola _"01001"_ cocok, maka dihapus dari awal string. <br>
+     Sisa string menjadi: _"010010010"[5:] = "0010"_.
+- Variabel matched diset ke **True** dan loop for dihentikan dengan break.
+### Iterasi Kedua (s = "0010") :
+- String s sekarang adalah _"0010"_.
+- Masuk lagi ke dalam loop while.
+- Mulai iterasi untuk mencocokkan pola : 
+  - Pola _"01001"_ : <br>
+    Tidak cocok, karena "0010" tidak diawali dengan _"01001"_ (terlalu pendek).
+  - Pola _"010"_ : <br>
+    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"010"_.
+  - Pola _"10"_ : <br>
+    Tidak cocok, karena "0010" diawali dengan _"00"_, bukan _"10"_.
+  - Pola _"00"_ : <br>
+    Cek apakah "0010" diawali dengan _"00"_. <br>
+    → Cocok.
+- Pola _"00"_ cocok, maka dihapus dari awal string. <br>
+  Sisa string menjadi : _"0010"[2:]_ = _"10"_.
+- Variabel matched diset ke **True** dan loop for dihentikan.
+### Iterasi Ketiga (s = "10") :
+- String s sekarang adalah _"10"_.
+- Masuk lagi ke dalam loop while.
+- Mulai iterasi untuk mencocokkan pola:
+  - Pola _"01001"_ : <br>
+    Tidak cocok karena string hanya 2 karakter.
+  - Pola _"010"_ : <br>
+    Tidak cocok.
+  - Pola _"10"_ : <br>
+    Cek apakah "10" diawali dengan _"10"_. <br>
+    → Cocok.
+- Pola _"10"_ cocok, maka dihapus dari string.
+- Sisa string menjadi : _"10"[2:] = ""_ (string kosong).
+- Variabel matched diset ke **True** dan loop for dihentikan.
+### Penyelesaian
+Loop while berhenti karena string s sudah kosong. <br>
+Fungsi _binary_checker_ mengembalikan **"Valid"** karena seluruh string berhasil dipotong sesuai dengan pola-pola yang ada.
 # :star: Arithmetic Expression Checker
 
 Sebagai seorang intern di software house, anda diminta membuat sebuah aturan rekursif untuk
