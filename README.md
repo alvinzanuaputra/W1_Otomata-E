@@ -101,38 +101,43 @@ Karena ada sisa string (110) yang tidak dapat dipotong dengan pola yang valid, m
 
 # :herb: Kode Python
 ```py
-def binary_checker(s):
-    # Daftar pola valid diurutkan berdasarkan panjang menurun agar pola terpanjang diutamakan
-    valid_patterns = ["01001", "010", "10", "00"]
+def binary_checker(s, memo={}):
+    # jika hasil sudah ada dalam memo, langsung kembalikan
+    if s in memo:
+        return memo[s]
+
+    valid_patterns = ["00", "10", "010", "01001"]
     
-    # Selama string s belum kosong
+    original_s = s  # untuk simpan input asli untuk memoisasi
+    
+    # kalau string s belum kosong
     while s:
         matched = False
-        # Cek setiap pola apakah menjadi prefix dari s
-        for pattern in valid_patterns:
+        for pattern in valid_patterns: # cek setiap pola apakah menjadi prefix dari s
             if s.startswith(pattern):
                 # Hapus pola tersebut dari s
                 s = s[len(pattern):]
                 matched = True
-                break  # Keluar dari loop pola jika ada kecocokan
-        # Jika tidak ada pola yang cocok, maka string tidak valid
+                break  # keluar dari loop pola jika ada kecocokan
+
+        # jika tidak ada pola yang cocok, maka string tidak valid
         if not matched:
+            memo[original_s] = "Tidak valid"
             return "Tidak valid"
     
-    # Jika seluruh string telah terhapus (kosong), maka valid
+    memo[original_s] = "Valid"  # Jika seluruh string telah terhapus (kosong), maka valid
     return "Valid"
 
 
 def main():
-    # User memasukkan angka biner
     binary_input = input("Masukkan bilangan biner: ")
-    # Panggil fungsi binary_checker dan tampilkan hasilnya
     result = binary_checker(binary_input)
     print(result)
 
 
 if __name__ == "__main__":
     main()
+
 ```
 # Penjelasan Program
 Berikut penjelasan alur kerja program ketika user menginputkan bilangan **010010010** :
